@@ -1,11 +1,10 @@
-
 clc;
 close all;
 clear all;
-%¾ØÕóA1Ã»ÓÐÄ£ÐÍÎó²î£¬ÃûÒåÄ£ÐÍÏµÊý
-A1=[0.9802 0.0196;0 0.9802];%+[0.0198;0.0]*(-0.8508)*[0.0 5.0];  %¸Ä±ä0.0196µÄÖµ£¬Ïà¶ÔµÄ¸Ä±äÁËÄ£ÐÍÎó²îµÄÓ°Ïì
-%¾ØÕóA2Ã»ÓÐÄ£ÐÍÎó²î£¬ÃûÒåÄ£ÐÍÏµÊý
-B1=[0.0196 0;0 0.0196];%+[0.0198;0.0]*(-0.8508)*[0.0 5.0]; %¸Ä±ä0.00µÄÖµ£¬Ïà¶ÔµÄ¸Ä±äÁËÄ£ÐÍÎó²îµÄÓ°Ïì
+%çŸ©é˜µA1æ²¡æœ‰æ¨¡åž‹è¯¯å·®ï¼Œåä¹‰æ¨¡åž‹ç³»æ•°
+A1=[0.9802 0.0196;0 0.9802];%+[0.0198;0.0]*(-0.8508)*[0.0 5.0];  %æ”¹å˜0.0196çš„å€¼ï¼Œç›¸å¯¹çš„æ”¹å˜äº†æ¨¡åž‹è¯¯å·®çš„å½±å“
+%çŸ©é˜µA2æ²¡æœ‰æ¨¡åž‹è¯¯å·®ï¼Œåä¹‰æ¨¡åž‹ç³»æ•°
+B1=[0.0196 0;0 0.0196];%+[0.0198;0.0]*(-0.8508)*[0.0 5.0]; %æ”¹å˜0.00çš„å€¼ï¼Œç›¸å¯¹çš„æ”¹å˜äº†æ¨¡åž‹è¯¯å·®çš„å½±å“
 B2=[1 0;0 1];
 C=[1 -1];
 A2=[0.9902 0.0196;0 0.9902];
@@ -18,14 +17,14 @@ Q=[1.9608 0.0195;0.0195 1.9605];
 bar_Q=[1.9608 0.0195;0.0195 1.9605];
 R=1;
 PI0=eye(2);
-z=cell(500,1);%ÏÈÇ°±äÁ¿Z(k)
+z=cell(500,1);%å…ˆå‰å˜é‡Z(k)
 for i=1:500
     z{i}=cell(1003,1);
     for t=1:1003
         z{i}{t}=0;
     end
 end
-u=cell(500,1);%Á¥Êôº¯Êý
+u=cell(500,1);%éš¶å±žå‡½æ•°
 for i=1:500
     u{i}=cell(1003,1);
     for t=1:1003
@@ -35,7 +34,7 @@ for i=1:500
             u{i}{t}{2}=0.2;
     end
 end
-xx=cell(500,1);%X(k)ÕæÊµ×´Ì¬
+xx=cell(500,1);%X(k)çœŸå®žçŠ¶æ€
 for i=1:500
     xx{i}=cell(1003,1);
     for t=1:1003
@@ -46,14 +45,14 @@ epsilon12=cell(500,1);
 for i=1:500
     
   while 1
-     epsilon12{i}=normrnd(0,1);    %ÕýÌ¬·Ö²¼  %ÐÞ¸ÄËæ»ú²úÉúÄ£ÐÍÎó²îµÄ·½²î
-  if  abs(epsilon12{i})<=1       %²»Í¬ÊµÑéËæ»ú²úÉúÒ»¸öÖµ
+     epsilon12{i}=normrnd(0,1);    %æ­£æ€åˆ†å¸ƒ  %ä¿®æ”¹éšæœºäº§ç”Ÿæ¨¡åž‹è¯¯å·®çš„æ–¹å·®
+  if  abs(epsilon12{i})<=1       %ä¸åŒå®žéªŒéšæœºäº§ç”Ÿä¸€ä¸ªå€¼
      break;
   end
   end     
 end
 es=[1.0;0.1];
-                           %²úÉú500´ÎÊµÑéÊý¾Ý
+                           %äº§ç”Ÿ500æ¬¡å®žéªŒæ•°æ®
                            %               
 % ---------------------------------------------------------------------------%          
     X1           = zeros(2,1003,500);
@@ -63,14 +62,14 @@ es=[1.0;0.1];
 Real_A = cell(500,1);
 Real_B = cell(500,1);
 Real_A2 = cell(500,1);
-for i=1:500 %500´ÎÊµÑé
+for i=1:500 %500æ¬¡å®žéªŒ
 for t=1:1003
     esk =cell2mat(epsilon12(i,1));
 if t == 1
 X1(:,t,i)=[0;0];
-Y1(:,t,i)=[ 0 ];%¶¨Òå³õÊ¼Êä³ö
+Y1(:,t,i)=[ 0 ];%å®šä¹‰åˆå§‹è¾“å‡º
 X2(:,t,i)=[0;0];
-Y2(:,t,i)=[ 0 ];%¶¨Òå³õÊ¼Êä³ö
+Y2(:,t,i)=[ 0 ];%å®šä¹‰åˆå§‹è¾“å‡º
 else
 Real_A1_Temp = A1+[0.0198;0.0]*esk*[0.0 5.0]; 
 Real_A2_Temp = A2+[0.0198;0.0]*esk*[0.0 5.0]; 
@@ -92,20 +91,25 @@ z{i}{t}=(xx{i}{t}(1)*3.1416/180-0.0098*xx{i}{t}(2)*3.1416/180);
 u{i}{t}{1}=1-1/(1+exp(3.1416/2-z{i}{t}));
 u{i}{t}{2}=1-u{i}{t}{1};
 end
-%Ã¿¸öÊ±¿ÌµÄXÎª6¸öÔªËØµÄÁÐÏòÁ¿£¬Ã¿¸öÊ±¿ÌµÄYÎª1¸öÔªËØµÄÏòÁ¿
+%æ¯ä¸ªæ—¶åˆ»çš„Xä¸º6ä¸ªå…ƒç´ çš„åˆ—å‘é‡ï¼Œæ¯ä¸ªæ—¶åˆ»çš„Yä¸º1ä¸ªå…ƒç´ çš„å‘é‡
 end
 end
  X_hat = zeros(2,1001,500);
  X_hat2 = zeros(2,1001,500);
- fprintf('¹ì¼£Êý¾ÝÒÑÉú³É\n');
+ fprintf('è½¨è¿¹æ•°æ®å·²ç”Ÿæˆ\n');
                       
 
-        %¶Ô500´ÎÊµÑéÊý¾Ý·Ö±ðÔËÓÃÁéÃô¶È³Í·£Ëã·¨         
+        %å¯¹500æ¬¡å®žéªŒæ•°æ®åˆ†åˆ«è¿ç”¨çµæ•åº¦æƒ©ç½šç®—æ³•         
               %  gamma =0.0305
 S=[0,0;0,0.099];
 T1=[0,0;0,0.099];      
 T2=[0,0;0,0];
-   gamma1 =(1-0.0305)/0.0305; %È¨ÖØÏµÊý
+    c99=cell(1,100);
+for i=1:100
+    c99{i}=0; 
+end
+for  gamma =1:100
+     gamma1=(1-gamma/100)/(gamma/100); %æƒé‡ç³»æ•°
     Pi1i= zeros(2, 2);
     for i=1:500
     for t=1:1001
@@ -174,245 +178,23 @@ for t=1:1000
      Method1_Standard_Deviation(t) = (Method1_Standard_Deviation1(t)^2+Method1_Standard_Deviation2(t)^2)^(1/2);
      Method1_STD_dB(t)             = 10 * log10( Method1_Standard_Deviation(t) ); 
 end
-fprintf('Â³°ô×´Ì¬¹À¼Æ1ÒÑÍê³É\n');
-
-        %¶Ô500´ÎÊµÑéÊý¾Ý·Ö±ðÔËÓÃÁéÃô¶È³Í·£Ëã·¨         
-              %  gamma =0.2859
-S=[0,0;0,0.099];
-T1=[0,0;0,0.099];      
-T2=[0,0;0,0];
-gamma1 =(1-0.2859)/0.2859; %È¨ÖØÏµÊý
-Pi1i= zeros(2, 2);
-    for i=1:500
-    for t=1:1001
-        if t == 1
-            Pi1i        = ( PI0^(-1) + bar_C'*R^(-1)*bar_C)^(-1);
-            Xili_hat    = Pi1i*bar_C'*R^(-1)*Y1(:,t,i); 
-        else
-            Pi1i_hat	=(Pi1i^(-1) + gamma1*S'*S)^(-1); 
-            T2_hat      =T2-gamma1*S*Pi1i_hat*S'*T2;
-            Q_hat       =(Q^(-1)+gamma1*T2'*(eye(2)+gamma1*S*Pi1i*S')^(-1)*T2)^(-1);
-            B2_hat      = bar_B2-gamma1*bar_A*Pi1i_hat*S'*T2;
-            A_hat       =(bar_A-gamma1*B2_hat*Q_hat*T2'*S)*(eye(2)-gamma1*Pi1i_hat*S'*S);
-            B1_hat      =bar_B1-gamma1*(bar_A*Pi1i_hat*S'+B2_hat*Q_hat* T2_hat')*T1; 
-                
-            Pit1li      = bar_A*Pi1i_hat*bar_A' + B2_hat*Q_hat*B2_hat';
-            Reit1       = R + bar_C*Pit1li*bar_C';
-            Pit1lit1	= Pit1li - Pit1li*bar_C'*Reit1^(-1)*bar_C*Pit1li;
-            xit1lit1_hat= B1_hat* es+A_hat*Xili_hat+ Pit1lit1*bar_C'*R^(-1)*.....
-                         (Y1(:,t,i)-bar_C*(B1_hat* es+ A_hat*Xili_hat));
-            Xili_hat	= xit1lit1_hat;
-            Pi1i        = Pit1lit1;
-        end
-            X_hat(:,t,i)= Xili_hat;
-    end
-    end
-    for i=1:500
-    for t=1:1001
-        if t == 1
-            Pi1i        =(PI0^(-1) + bar_C'*R^(-1)*bar_C)^(-1);
-            Xili_hat    = Pi1i*bar_C'*R^(-1)*Y2(:,t,i); 
-        else
-            Pi1i_hat	=(Pi1i^(-1) + gamma1*S'*S)^(-1);
-            T2_hat      =T2-gamma1*S*Pi1i_hat*S'*T2;
-            Q_hat       =(Q^(-1)+gamma1*T2'*(eye(2)+gamma1*S*Pi1i*S')^(-1)*T2)^(-1);
-            B2_hat      = u{i}{t}{2}*bar_B2-gamma1*bar_A2*Pi1i_hat*S'*T2;
-            A_hat       =(bar_A2-gamma1*B2_hat*Q_hat*T2'*S)*(eye(2)-gamma1*Pi1i_hat*S'*S);
-            B1_hat      =u{i}{t}{2}*bar_B1-gamma1*(bar_A2*Pi1i_hat*S'+B2_hat*Q_hat*T2_hat')*T1; 
-            
-            Pit1li      = bar_A2*Pi1i_hat*bar_A2' + B2_hat*Q_hat*B2_hat';
-            Reit1       = R + bar_C*Pit1li*bar_C';
-            Pit1lit1	= Pit1li - Pit1li*bar_C'*Reit1^(-1)*bar_C*Pit1li;
-            xit1lit1_hat= B1_hat*[1.0;0.1]+A_hat*Xili_hat+ Pit1lit1*bar_C'*R^(-1)*(Y2(:,t,i)-bar_C*(B1_hat*[1.0;0.1]+ A_hat*Xili_hat));
-
-            Xili_hat	= xit1lit1_hat;
-            Pi1i        = Pit1lit1;
-        end
-            X_hat2(:,t,i)= Xili_hat;
-    end
-    end
-Method3_Deviation_SUM       = zeros(1,1000);
-Method3_Deviation_SUM2       = zeros(1,1000);
-Method3_Standard_Deviation1	= zeros(1,1000);
-Method3_Standard_Deviation2	= zeros(1,1000);
-Method3_Standard_Deviation	= zeros(1,1000);
-Method3_STD_dB              = zeros(1,1000);
-for t=1:1000
-     for i=1:500
-       Method3_Deviation_SUM(t) = Method3_Deviation_SUM(t) + ...
-                                     ( X_hat(1,t+1,i) - X1(1,t+1,i) )^2+( X_hat(2,t+1,i) - X1(2,t+1,i) )^2;
-     
-       Method3_Deviation_SUM2(t) = Method3_Deviation_SUM2(t) + ...
-                                     ( X_hat2(1,t+1,i) - X2(1,t+1,i) )^2+( X_hat2(2,t+1,i) - X2(2,t+1,i) )^2;
-     end
-     Method3_Standard_Deviation1(t) = Method3_Deviation_SUM(t) / 500;
-     Method3_Standard_Deviation2(t) = Method3_Deviation_SUM2(t) / 500;
-     Method3_Standard_Deviation(t) = (Method3_Standard_Deviation1(t)^2+Method3_Standard_Deviation2(t)^2)^(1/2);
-     Method3_STD_dB(t)             = 10 * log10( Method3_Standard_Deviation(t) ); 
+c99{gamma}=Method1_STD_dB(500);
+fprintf('é¢„æµ‹æ¨¡åž‹1+é²æ£’çŠ¶æ€ä¼°è®¡æ–¹æ³•å·²å®Œæˆ\n');
 end
-fprintf('Â³°ô×´Ì¬¹À¼Æ2ÒÑÍê³É\n');
-
-          %¶Ô500´ÎÊµÑéÊý¾Ý·Ö±ðÔËÓÃÁéÃô¶È³Í·£Ëã·¨%  
-                    %gamma =7500
-S=[0,0;0,0.099];
-T1=[0,0;0,0.099];      
-T2=[0,0;0,0];
-gamma1 =(1-0.7500)/0.7500; %È¨ÖØÏµÊý
-Pi1i= zeros(2, 2);
-    for i=1:500
-    for t=1:1001
-        if t == 1
-            Pi1i        = ( PI0^(-1) + bar_C'*R^(-1)*bar_C)^(-1);
-            Xili_hat    = Pi1i*bar_C'*R^(-1)*Y1(:,t,i); 
-        else
-            Pi1i_hat	=(Pi1i^(-1) + gamma1*S'*S)^(-1); 
-            T2_hat      =T2-gamma1*S*Pi1i_hat*S'*T2;
-            Q_hat       =(Q^(-1)+gamma1*T2'*(eye(2)+gamma1*S*Pi1i*S')^(-1)*T2)^(-1);
-            B2_hat      = bar_B2-gamma1*bar_A*Pi1i_hat*S'*T2;
-            A_hat       =(bar_A-gamma1*B2_hat*Q_hat*T2'*S)*(eye(2)-gamma1*Pi1i_hat*S'*S);
-            B1_hat      =bar_B1-gamma1*(bar_A*Pi1i_hat*S'+B2_hat*Q_hat* T2_hat')*T1; 
-                
-            Pit1li      = bar_A*Pi1i_hat*bar_A' + B2_hat*Q_hat*B2_hat';
-            Reit1       = R + bar_C*Pit1li*bar_C';
-            Pit1lit1	= Pit1li - Pit1li*bar_C'*Reit1^(-1)*bar_C*Pit1li;
-            xit1lit1_hat= B1_hat* es+A_hat*Xili_hat+ Pit1lit1*bar_C'*R^(-1)*.....
-                         (Y1(:,t,i)-bar_C*(B1_hat* es+ A_hat*Xili_hat));
-            Xili_hat	= xit1lit1_hat;
-            Pi1i        = Pit1lit1;
-        end
-            X_hat(:,t,i)= Xili_hat;
-    end
-    end
-    for i=1:500
-    for t=1:1001
-        if t == 1
-            Pi1i        =(PI0^(-1) + bar_C'*R^(-1)*bar_C)^(-1);
-            Xili_hat    = Pi1i*bar_C'*R^(-1)*Y2(:,t,i); 
-        else
-            Pi1i_hat	=(Pi1i^(-1) + gamma1*S'*S)^(-1);
-            T2_hat      =T2-gamma1*S*Pi1i_hat*S'*T2;
-            Q_hat       =(Q^(-1)+gamma1*T2'*(eye(2)+gamma1*S*Pi1i*S')^(-1)*T2)^(-1);
-            B2_hat      = u{i}{t}{2}*bar_B2-gamma1*bar_A2*Pi1i_hat*S'*T2;
-            A_hat       =(bar_A2-gamma1*B2_hat*Q_hat*T2'*S)*(eye(2)-gamma1*Pi1i_hat*S'*S);
-            B1_hat      =u{i}{t}{2}*bar_B1-gamma1*(bar_A2*Pi1i_hat*S'+B2_hat*Q_hat*T2_hat')*T1; 
-            
-            Pit1li      = bar_A2*Pi1i_hat*bar_A2' + B2_hat*Q_hat*B2_hat';
-            Reit1       = R + bar_C*Pit1li*bar_C';
-            Pit1lit1	= Pit1li - Pit1li*bar_C'*Reit1^(-1)*bar_C*Pit1li;
-            xit1lit1_hat= B1_hat*[1.0;0.1]+A_hat*Xili_hat+ Pit1lit1*bar_C'*R^(-1)*(Y2(:,t,i)-bar_C*(B1_hat*[1.0;0.1]+ A_hat*Xili_hat));
-
-            Xili_hat	= xit1lit1_hat;
-            Pi1i        = Pit1lit1;
-        end
-            X_hat2(:,t,i)= Xili_hat;
-    end
-    end
-Method4_Deviation_SUM       = zeros(1,1000);
-Method4_Deviation_SUM2       = zeros(1,1000);
-Method4_Standard_Deviation1	= zeros(1,1000);
-Method4_Standard_Deviation2	= zeros(1,1000);
-Method4_Standard_Deviation	= zeros(1,1000);
-Method4_STD_dB              = zeros(1,1000);
-for t=1:1000
-     for i=1:500
-       Method4_Deviation_SUM(t) = Method4_Deviation_SUM(t) + ...
-                                     ( X_hat(1,t+1,i) - X1(1,t+1,i) )^2+( X_hat(2,t+1,i) - X1(2,t+1,i) )^2;
-     
-       Method4_Deviation_SUM2(t) = Method4_Deviation_SUM2(t) + ...
-                                     ( X_hat2(1,t+1,i) - X2(1,t+1,i) )^2+( X_hat2(2,t+1,i) - X2(2,t+1,i) )^2;
-     end
-     Method4_Standard_Deviation1(t) = Method4_Deviation_SUM(t) / 500;
-     Method4_Standard_Deviation2(t) = Method4_Deviation_SUM2(t) / 500;
-     Method4_Standard_Deviation(t) = (Method4_Standard_Deviation1(t)^2+Method4_Standard_Deviation2(t)^2)^(1/2);
-     Method4_STD_dB(t)             = 10 * log10( Method4_Standard_Deviation(t) ); 
-end
-fprintf('Â³°ô×´Ì¬¹À¼Æ3ÒÑÍê³É\n');
-                 
-                    %¶Ô500´ÎÊµÑéÊý¾Ý·Ö±ðÔËÓÃÁéÃô¶È³Í·£Ëã·¨   
-                           %gamma =0.9490
-% ---------------------------------------------------------------------------%
-S=[0,0;0,0.099];
-T1=[0,0;0,0.099];      
-T2=[0,0;0,0];
-gamma1 =(1-1)/0.9490; %È¨ÖØÏµÊý
- for i=1:500
-    for t=1:1001
-        if t == 1
-            Pi1i        = ( PI0^(-1) + bar_C'*R^(-1)*bar_C)^(-1);
-            Xili_hat    = Pi1i*bar_C'*R^(-1)*Y1(:,t,i); 
-        else
-            Pi1i_hat	=(Pi1i^(-1) + gamma1*S'*S)^(-1); 
-            T2_hat      =T2-gamma1*S*Pi1i_hat*S'*T2;
-            Q_hat       =(Q^(-1)+gamma1*T2'*(eye(2)+gamma1*S*Pi1i*S')^(-1)*T2)^(-1);
-            B2_hat      = bar_B2-gamma1*bar_A*Pi1i_hat*S'*T2;
-            A_hat       =(bar_A-gamma1*B2_hat*Q_hat*T2'*S)*(eye(2)-gamma1*Pi1i_hat*S'*S);
-            B1_hat      =bar_B1-gamma1*(bar_A*Pi1i_hat*S'+B2_hat*Q_hat* T2_hat')*T1; 
-                
-            Pit1li      = bar_A*Pi1i_hat*bar_A' + B2_hat*Q_hat*B2_hat';
-            Reit1       = R + bar_C*Pit1li*bar_C';
-            Pit1lit1	= Pit1li - Pit1li*bar_C'*Reit1^(-1)*bar_C*Pit1li;
-            xit1lit1_hat= B1_hat* es+A_hat*Xili_hat+ Pit1lit1*bar_C'*R^(-1)*.....
-                         (Y1(:,t,i)-bar_C*(B1_hat* es+ A_hat*Xili_hat));
-            Xili_hat	= xit1lit1_hat;
-            Pi1i        = Pit1lit1;
-        end
-            X_hat(:,t,i)= Xili_hat;
-    end
-    end
-    for i=1:500
-    for t=1:1001
-        if t == 1
-            Pi1i        =(PI0^(-1) + bar_C'*R^(-1)*bar_C)^(-1);
-            Xili_hat    = Pi1i*bar_C'*R^(-1)*Y2(:,t,i); 
-        else
-            Pi1i_hat	=(Pi1i^(-1) + gamma1*S'*S)^(-1);
-            T2_hat      =T2-gamma1*S*Pi1i_hat*S'*T2;
-            Q_hat       =(Q^(-1)+gamma1*T2'*(eye(2)+gamma1*S*Pi1i*S')^(-1)*T2)^(-1);
-            B2_hat      = u{i}{t}{2}*bar_B2-gamma1*bar_A2*Pi1i_hat*S'*T2;
-            A_hat       =(bar_A2-gamma1*B2_hat*Q_hat*T2'*S)*(eye(2)-gamma1*Pi1i_hat*S'*S);
-            B1_hat      =u{i}{t}{2}*bar_B1-gamma1*(bar_A2*Pi1i_hat*S'+B2_hat*Q_hat*T2_hat')*T1; 
-            
-            Pit1li      = bar_A2*Pi1i_hat*bar_A2' + B2_hat*Q_hat*B2_hat';
-            Reit1       = R + bar_C*Pit1li*bar_C';
-            Pit1lit1	= Pit1li - Pit1li*bar_C'*Reit1^(-1)*bar_C*Pit1li;
-            xit1lit1_hat= B1_hat*[1.0;0.1]+A_hat*Xili_hat+ Pit1lit1*bar_C'*R^(-1)*(Y2(:,t,i)-bar_C*(B1_hat*[1.0;0.1]+ A_hat*Xili_hat));
-
-            Xili_hat	= xit1lit1_hat;
-            Pi1i        = Pit1lit1;
-        end
-            X_hat2(:,t,i)= Xili_hat;
-    end
-    end
-Method5_Deviation_SUM       = zeros(1,1000);
-Method5_Deviation_SUM2      = zeros(1,1000);
-Method5_Standard_Deviation1	= zeros(1,1000);
-Method5_Standard_Deviation2	= zeros(1,1000);
-Method5_Standard_Deviation	= zeros(1,1000);
-Method5_STD_dB              = zeros(1,1000);
-for t=1:1000
-     for i=1:500
-       Method5_Deviation_SUM(t) = Method5_Deviation_SUM(t) + ...
-                                     ( X_hat(1,t+1,i) - X1(1,t+1,i) )^2+( X_hat(2,t+1,i) - X1(2,t+1,i) )^2;
-     
-       Method5_Deviation_SUM2(t) = Method5_Deviation_SUM2(t) + ...
-                                     ( X_hat2(1,t+1,i) - X2(1,t+1,i) )^2+( X_hat2(2,t+1,i) - X2(2,t+1,i) )^2;
-     end
-     Method5_Standard_Deviation1(t) = Method5_Deviation_SUM(t) / 500;
-     Method5_Standard_Deviation2(t) = Method5_Deviation_SUM2(t) / 500;
-     Method5_Standard_Deviation(t) = (Method5_Standard_Deviation1(t)^2+Method5_Standard_Deviation2(t)^2)^(1/2);
-     Method5_STD_dB(t)             = 10 * log10( Method5_Standard_Deviation(t) ); 
-end
-n5=Method5_STD_dB(500);
-fprintf('Â³°ô×´Ì¬¹À¼Æ4ÒÑÍê³É\n');
+c99=cell2mat(c99);
+gaa=[0.01:0.01:1];
+hh=[0.01:0.01:1];
+c99=c99*(gaa/hh);
+fprintf('é²æ£’çŠ¶æ€ä¼°è®¡forå¾ªçŽ¯å·²å®Œæˆ\n');
 
 
- % »ùÓÚÃûÒå²ÎÊýµÄKalman 
+ % åŸºäºŽåä¹‰å‚æ•°çš„Kalman 
 % -------------------------------------------------------------------------- %
-xn	= zeros(2,1);                   % x-negetive£¨x-£©ÏÈÑé¹À¼Æ
-xp	= zeros(2,1);                   % x-positive£¨x+£©ºóÑé¹À¼Æ
-pn	= zeros(2,2);             % p-negetive£¨p-£©ÏÈÑé¹À¼Æ·½²î
-pp	= zeros(2,2);             % p-positive£¨p+£©ºóÑé¹À¼Æ·½²î
-g	= zeros(2,1);                   % ÎÈ¶¨ÔöÒæ¾ØÕó
+xn	= zeros(2,1);                   % x-negetiveï¼ˆx-ï¼‰å…ˆéªŒä¼°è®¡
+xp	= zeros(2,1);                   % x-positiveï¼ˆx+ï¼‰åŽéªŒä¼°è®¡
+pn	= zeros(2,2);             % p-negetiveï¼ˆp-ï¼‰å…ˆéªŒä¼°è®¡æ–¹å·®
+pp	= zeros(2,2);             % p-positiveï¼ˆp+ï¼‰åŽéªŒä¼°è®¡æ–¹å·®
+g	= zeros(2,1);                   % ç¨³å®šå¢žç›ŠçŸ©é˜µ
 for i=1:500
     for t=1:1001
             if t == 1
@@ -471,14 +253,14 @@ for t=1:1000
      Method2_STD_dB(t)             = 10 * log10( Method2_Standard_Deviation(t) ); 
 end
 
-fprintf('ÃûÒå²ÎÊýKalman·½·¨ÒÑÍê³É\n');
-                         % »ùÓÚÊµ¼ÊÄ£ÐÍµÄKalman       
+fprintf('åä¹‰å‚æ•°Kalmanæ–¹æ³•å·²å®Œæˆ\n');
+                         % åŸºäºŽå®žé™…æ¨¡åž‹çš„Kalman       
 % ------------------------------------------------------------------------- %
-xn	= zeros(2,1);                   % x-negetive£¨x-£©ÏÈÑé¹À¼Æ
-xp	= zeros(2,1);                   % x-positive£¨x+£©ºóÑé¹À¼Æ
-pn	= zeros(2,2);             % p-negetive£¨p-£©ÏÈÑé¹À¼Æ·½²î
-pp	= zeros(2,2);             % p-positive£¨p+£©ºóÑé¹À¼Æ·½²î
-g	= zeros(2,1);                   % ÎÈ¶¨ÔöÒæ¾ØÕó        
+xn	= zeros(2,1);                   % x-negetiveï¼ˆx-ï¼‰å…ˆéªŒä¼°è®¡
+xp	= zeros(2,1);                   % x-positiveï¼ˆx+ï¼‰åŽéªŒä¼°è®¡
+pn	= zeros(2,2);             % p-negetiveï¼ˆp-ï¼‰å…ˆéªŒä¼°è®¡æ–¹å·®
+pp	= zeros(2,2);             % p-positiveï¼ˆp+ï¼‰åŽéªŒä¼°è®¡æ–¹å·®
+g	= zeros(2,1);                   % ç¨³å®šå¢žç›ŠçŸ©é˜µ        
 for i=1:500
     for t=1:1001
             if t == 1
@@ -539,7 +321,7 @@ end
 n6=Method6_STD_dB(500);
 
 
-fprintf('Êµ¼Ê²ÎÊýKalman·½·¨ÒÑÍê³É\n');
+fprintf('å®žé™…å‚æ•°Kalmanæ–¹æ³•å·²å®Œæˆ\n');
 
 
 figure(1);
@@ -547,28 +329,28 @@ plot(gaa,c, ':m',gaa, b, '-b',gaa, a, '-r');
 xlabel('Design parameters \gamma');
 ylabel('Estimation errors variance (dB)');hold on;
 legend('Robust state estimation','Kalman filter based on nominal parameters','Kalman filter based on actual model');
-figure(2);
-semilogx(Method1_STD_dB',':g'); hold on;
-semilogx(Method2_STD_dB',':k'); hold on;
-% semilogx(Method2_STD_dB',':c'); hold on;
-semilogx(Method3_STD_dB',':b'); hold on;
-% semilogx(Method3_STD_dB',':c'); hold on;
-semilogx(Method4_STD_dB','-k'); hold on;
-% semilogx(Method4_STD_dB','--m'); hold on;
-semilogx(Method5_STD_dB','-y'); hold on;
-% semilogx(Method5_STD_dB','-k'); hold on;
-semilogx(Method6_STD_dB','-k'); hold on;
-% semilogx(Method6_STD_dB','--c'); hold on;
-semilogx(Method7_STD_dB','-r'); hold on;
-% semilogx(Method7_STD_dB',':c'); hold on;
-% xlabel('Ê±¿Ìi');
-% ylabel('¹À¼ÆÎó²î·½²î£¨dB£©');
-% legend('Â³°ô×´Ì¬¹À¼Æ','»ùÓÚÃûÒå²ÎÊýµÄKalman','»ùÓÚÊµ¼ÊÄ£ÐÍµÄKalman');
-xlabel('Sampled instant i');
-ylabel('Estimation errors variance (dB)');
-% legend('Â³°ô×´Ì¬¹À¼Æ','»ùÓÚÃûÒå²ÎÊýµÄKalman','»ùÓÚÊµ¼ÊÄ£ÐÍµÄKalman');
-legend('Robust state estimation \gamma=0.0305','Robust state estimation \gamma=0.2859','Robust state estimation \gamma=0.6500','Robust state estimation \gamma=0.9490','Kalman filter based on nominal parameters','Kalman filter based on actual model');
-
+% figure(2);
+% semilogx(Method1_STD_dB',':g'); hold on;
+% semilogx(Method2_STD_dB',':k'); hold on;
+% % semilogx(Method2_STD_dB',':c'); hold on;
+% semilogx(Method3_STD_dB',':b'); hold on;
+% % semilogx(Method3_STD_dB',':c'); hold on;
+% semilogx(Method4_STD_dB','-k'); hold on;
+% % semilogx(Method4_STD_dB','--m'); hold on;
+% semilogx(Method5_STD_dB','-y'); hold on;
+% % semilogx(Method5_STD_dB','-k'); hold on;
+% semilogx(Method6_STD_dB','-k'); hold on;
+% % semilogx(Method6_STD_dB','--c'); hold on;
+% semilogx(Method7_STD_dB','-r'); hold on;
+% % semilogx(Method7_STD_dB',':c'); hold on;
+% % xlabel('æ—¶åˆ»i');
+% % ylabel('ä¼°è®¡è¯¯å·®æ–¹å·®ï¼ˆdBï¼‰');
+% % legend('é²æ£’çŠ¶æ€ä¼°è®¡','åŸºäºŽåä¹‰å‚æ•°çš„Kalman','åŸºäºŽå®žé™…æ¨¡åž‹çš„Kalman');
+% xlabel('Sampled instant i');
+% ylabel('Estimation errors variance (dB)');
+% % legend('é²æ£’çŠ¶æ€ä¼°è®¡','åŸºäºŽåä¹‰å‚æ•°çš„Kalman','åŸºäºŽå®žé™…æ¨¡åž‹çš„Kalman');
+% legend('Robust state estimation \gamma=0.0305','Robust state estimation \gamma=0.2859','Robust state estimation \gamma=0.6500','Robust state estimation \gamma=0.9490','Kalman filter based on nominal parameters','Kalman filter based on actual model');
+% 
 
 
 
