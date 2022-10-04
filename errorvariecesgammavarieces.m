@@ -252,7 +252,14 @@ for t=1:1000
      Method2_Standard_Deviation(t) = (Method2_Standard_Deviation1(t)^2+Method2_Standard_Deviation2(t)^2)^(1/2);
      Method2_STD_dB(t)             = 10 * log10( Method2_Standard_Deviation(t) ); 
 end
-
+n5=Method2_STD_dB(500);
+gaa=[0.01:0.01:1];
+hh=[0.01:0.01:1];
+n5=n5*(gaa/hh);
+b=zeros(1,100);
+for i=1:100
+    b(i)=n5;
+end
 fprintf('名义参数Kalman方法已完成\n');
                          % 基于实际模型的Kalman       
 % ------------------------------------------------------------------------- %
@@ -319,45 +326,22 @@ for t=1:1000
      Method6_STD_dB(t)             = 10 * log10( Method6_Standard_Deviation(t) ); 
 end
 n6=Method6_STD_dB(500);
-
+gaa=[0.01:0.01:1];
+hh=[0.01:0.01:1];
+n6=n6*(gaa/hh);
+a=zeros(1,100);
+for i=1:100
+    a(i)=n6;
+end
 
 fprintf('实际参数Kalman方法已完成\n');
 
 
 figure(1);
-plot(gaa,c, ':m',gaa, b, '-b',gaa, a, '-r');
+plot(gaa,c99, ':m',gaa, b, '-b',gaa, a, '-r');
 xlabel('Design parameters \gamma');
 ylabel('Estimation errors variance (dB)');hold on;
-legend('Robust state estimation','Kalman filter based on nominal parameters','Kalman filter based on actual model');
-% figure(2);
-% semilogx(Method1_STD_dB',':g'); hold on;
-% semilogx(Method2_STD_dB',':k'); hold on;
-% % semilogx(Method2_STD_dB',':c'); hold on;
-% semilogx(Method3_STD_dB',':b'); hold on;
-% % semilogx(Method3_STD_dB',':c'); hold on;
-% semilogx(Method4_STD_dB','-k'); hold on;
-% % semilogx(Method4_STD_dB','--m'); hold on;
-% semilogx(Method5_STD_dB','-y'); hold on;
-% % semilogx(Method5_STD_dB','-k'); hold on;
-% semilogx(Method6_STD_dB','-k'); hold on;
-% % semilogx(Method6_STD_dB','--c'); hold on;
-% semilogx(Method7_STD_dB','-r'); hold on;
-% % semilogx(Method7_STD_dB',':c'); hold on;
-% % xlabel('时刻i');
-% % ylabel('估计误差方差（dB）');
-% % legend('鲁棒状态估计','基于名义参数的Kalman','基于实际模型的Kalman');
-% xlabel('Sampled instant i');
-% ylabel('Estimation errors variance (dB)');
-% % legend('鲁棒状态估计','基于名义参数的Kalman','基于实际模型的Kalman');
-% legend('Robust state estimation \gamma=0.0305','Robust state estimation \gamma=0.2859','Robust state estimation \gamma=0.6500','Robust state estimation \gamma=0.9490','Kalman filter based on nominal parameters','Kalman filter based on actual model');
-% 
+plot(0.5,b(5),'-m*');hold on;%%名义
+plot(0.5,a(5),'-bs');hold on;%%实际
+plot(0.5,c99(5),'-rD');hold on;%%鲁棒
 
-
-
- 
-
-
- 
-
-
- 
